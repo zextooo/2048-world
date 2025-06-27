@@ -24,39 +24,44 @@ h1 {
   gap: 20px;
 }
 
+/* Grid setup */
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 80px);
-  grid-template-rows: repeat(4, 80px);
-  gap: 5px;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 10px;
   justify-content: center;
   margin: 20px auto;
+  position: relative;
 }
 
+/* Tile style */
 .tile {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: #cdc1b4;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #776e65;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease-in-out;
+  position: relative;
 }
 
+/* Optional merged effect (temporary background flash) */
 .tile.merged {
-  background-color: #f7c873;
-  animation: pop 0.2s ease;
+  background-color: #f2b179;
+  animation: mergeFlash 0.25s ease;
 }
 
-@keyframes pop {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.2); }
-  100% { transform: scale(1); }
+@keyframes mergeFlash {
+  0%   { background-color: #f2b179; }
+  50%  { background-color: #f59563; }
+  100% { background-color: #f2b179; }
 }
 
 button {
