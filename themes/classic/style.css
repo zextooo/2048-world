@@ -170,8 +170,8 @@ button:hover {
 }
 
 /* Tile colors by value */
-.tile[data-value="4096"]  { background: #ff00ff; color: #000; }
-.tile[data-value="8192"]  { background: #00ffff; color: #000; }
+.tile[data-value="4096"]  { background: #556b2f; color: #fff; }
+.tile[data-value="8192"]  { background: #4682b4; color: #fff; }
 .tile[data-value="16384"] { background: #00ff7f; color: #000; }
 .tile[data-value="32768"] { background: #ff1493; color: #fff; }
 .tile[data-value="65536"] { background: #1e90ff; color: #fff; }
