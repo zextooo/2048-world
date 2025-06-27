@@ -1,3 +1,4 @@
+/* Base styling */
 body {
   font-family: Arial, sans-serif;
   background: #faf8ef;
@@ -9,52 +10,42 @@ body {
 h1 {
   font-size: 3em;
   color: #776e65;
+  margin-bottom: 10px;
 }
 
-#scoreboard {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  font-size: 1.3em;
+#score {
+  font-size: 1.5em;
   margin-bottom: 20px;
   color: #333;
 }
 
+/* Grid container */
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(4, 100px);
-  gap: 8px;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 5px;
   justify-content: center;
   margin: 20px auto;
 }
 
+/* Individual tiles */
 .tile {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background: #cdc1b4;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   color: #776e65;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 
-.tile.merged {
-  animation: pop 0.2s ease;
-  background-color: #f7c873;
-}
-
-@keyframes pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-
+/* Optional: Add style for new game button */
 button {
   padding: 10px 20px;
   font-size: 16px;
