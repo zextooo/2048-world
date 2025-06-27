@@ -1,12 +1,12 @@
-/* General page styling */
 body {
   font-family: Arial, sans-serif;
-  background: url('https://marketplace.canva.com/EAD2962NKnQ/2/0/1600w/canva-rainbow-gradient-pink-and-purple-virtual-background-_Tcjok-d9b4.jpg') no-repeat center center fixed;
+  background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
   text-align: center;
   padding: 20px;
   margin: 0;
 }
+
 
 
 /* Title */
