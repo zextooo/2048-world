@@ -27,9 +27,9 @@ h1 {
 /* Grid setup */
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: repeat(4, 100px);
-  gap: 10px;
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(4, 120px);
+  gap: 12px;
   justify-content: center;
   margin: 20px auto;
   position: relative;
@@ -37,10 +37,10 @@ h1 {
 
 /* Tile style */
 .tile {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   background: #cdc1b4;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
   color: #776e65;
   display: flex;
@@ -50,6 +50,7 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.15s ease-in-out;
   position: relative;
+   border: 2px solid #bbada0; /* Light brown border */
 }
 
 /* Optional merged effect (temporary background flash) */
@@ -58,11 +59,16 @@ h1 {
   animation: mergeFlash 0.25s ease;
 }
 
-@keyframes mergeFlash {
-  0%   { background-color: #f2b179; }
-  50%  { background-color: #f59563; }
-  100% { background-color: #f2b179; }
+@keyframes mergeAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
+
+.tile.merged {
+  animation: mergeAnimation 0.25s ease-in-out;
+}
+
 
 button {
   padding: 10px 20px;
