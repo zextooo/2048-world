@@ -170,13 +170,17 @@ button:hover {
 }
 
 /* Tile colors by value */
-.tile[data-value="4096"]  { background: #556b2f; color: #fff; }
-.tile[data-value="8192"]  { background: #4682b4; color: #fff; }
-.tile[data-value="16384"] { background: #00ff7f; color: #000; }
-.tile[data-value="32768"] { background: #ff1493; color: #fff; }
-.tile[data-value="65536"] { background: #1e90ff; color: #fff; }
-.tile[data-value="131072"]{ background: #ff8c00; color: #000; }
-.tile[data-value="262144"]{ background: #7cfc00; color: #000; }
+.tile[data-value="2"]    { background: #e0f7fa; color: #000; }
+.tile[data-value="4"]    { background: #b2ebf2; color: #000; }
+.tile[data-value="8"]    { background: #80deea; color: #000; }
+.tile[data-value="16"]   { background: #4dd0e1; color: #000; }
+.tile[data-value="32"]   { background: #26c6da; color: #000; }
+.tile[data-value="64"]   { background: #00bcd4; color: #fff; }
+.tile[data-value="128"]  { background: #00acc1; color: #fff; }
+.tile[data-value="256"]  { background: #0097a7; color: #fff; }
+.tile[data-value="512"]  { background: #00838f; color: #fff; }
+.tile[data-value="1024"] { background: #006064; color: #fff; }
+.tile[data-value="2048"] { background: #004d40; color: #fff; }
 .game-container {
   position: relative;
   z-index: 1;
