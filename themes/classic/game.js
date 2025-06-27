@@ -1,34 +1,135 @@
-const grid = document.getElementById("grid");
+const gridContainer = document.getElementById("grid-container");
+const scoreDisplay = document.getElementById("score");
+let grid = [];
+let score = 0;
 
-function createTile(value = "") {
-  const tile = document.createElement("div");
-  tile.className = "tile";
-  tile.textContent = value;
-  return tile;
+function createGrid() {
+  grid = new Array(4).fill(null).map(() => new Array(4).fill(0));
+  updateBoard();
 }
 
-function generateBoard() {
-  grid.innerHTML = "";
-  for (let i = 0; i < 16; i++) {
-    const tile = createTile();
-    grid.appendChild(tile);
-  }
-}
-
-function startGame() {
-  generateBoard();
-  placeRandomTile();
-  placeRandomTile();
+function updateBoard() {
+  gridContainer.innerHTML = "";
+  grid.flat().forEach((value) => {
+    const tile = document.createElement("div");
+    tile.className = "tile";
+    tile.textContent = value === 0 ? "" : value;
+    gridContainer.appendChild(tile);
+  });
+  scoreDisplay.textContent = "Score: " + score;
 }
 
 function placeRandomTile() {
-  const tiles = [...grid.children];
-  const emptyTiles = tiles.filter(tile => tile.textContent === "");
-  if (emptyTiles.length === 0) return;
-
-  const randomTile = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
-  randomTile.textContent = Math.random() < 0.9 ? "2" : "4";
+  const empty = [];
+  grid.forEach((row, i) => {
+    row.forEach((val, j) => {
+      if (val === 0) empty.push([i, j]);
+    });
+  });
+  if (empty.length === 0) return;
+  const [i, j] = empty[Math.floor(Math.random() * empty.length)];
+  grid[i][j] = Math.random() < 0.9 ? 2 : 4;
 }
 
-// Start game on load
+function move(direction) {
+  let moved = false;
+  let mergedThisTurn = new Array(4).fill(null).map(() => new Array(4).fill(false));
+
+  function moveRow(row) {
+    let newRow = row.filter((val) => val !== 0);
+    for (let i = 0; i < newRow.length - 1; i++) {
+      if (newRow[i] === newRow[i + 1]) {
+        newRow[i] *= 2;
+        score += newRow[i];
+        newRow[i + 1] = 0;
+      }
+    }
+    return newRow.filter((val) => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
+  }
+
+  if (direction === "left") {
+    for (let i = 0; i < 4; i++) {
+      const newRow = moveRow(grid[i]);
+      if (!arraysEqual(grid[i], newRow)) moved = true;
+      grid[i] = newRow;
+    }
+  }
+
+  if (direction === "right") {
+    for (let i = 0; i < 4; i++) {
+      const reversed = [...grid[i]].reverse();
+      const newRow = moveRow(reversed).reverse();
+      if (!arraysEqual(grid[i], newRow)) moved = true;
+      grid[i] = newRow;
+    }
+  }
+
+  if (direction === "up") {
+    for (let col = 0; col < 4; col++) {
+      let column = grid.map((row) => row[col]);
+      let newCol = moveRow(column);
+      for (let row = 0; row < 4; row++) {
+        if (grid[row][col] !== newCol[row]) moved = true;
+        grid[row][col] = newCol[row];
+      }
+    }
+  }
+
+  if (direction === "down") {
+    for (let col = 0; col < 4; col++) {
+      let column = grid.map((row) => row[col]).reverse();
+      let newCol = moveRow(column).reverse();
+      for (let row = 0; row < 4; row++) {
+        if (grid[row][col] !== newCol[row]) moved = true;
+        grid[row][col] = newCol[row];
+      }
+    }
+  }
+
+  if (moved) {
+    placeRandomTile();
+    updateBoard();
+    if (isGameOver()) alert("Game Over!");
+  }
+}
+
+function isGameOver() {
+  for (let i = 0; i < 4; i++)
+    for (let j = 0; j < 4; j++) {
+      if (grid[i][j] === 0) return false;
+      if (j < 3 && grid[i][j] === grid[i][j + 1]) return false;
+      if (i < 3 && grid[i][j] === grid[i + 1][j]) return false;
+    }
+  return true;
+}
+
+function arraysEqual(a, b) {
+  return a.every((val, index) => val === b[index]);
+}
+
+function startGame() {
+  score = 0;
+  createGrid();
+  placeRandomTile();
+  placeRandomTile();
+  updateBoard();
+}
+
+document.addEventListener("keydown", (e) => {
+  switch (e.key) {
+    case "ArrowLeft":
+      move("left");
+      break;
+    case "ArrowRight":
+      move("right");
+      break;
+    case "ArrowUp":
+      move("up");
+      break;
+    case "ArrowDown":
+      move("down");
+      break;
+  }
+});
+
 window.onload = startGame;
