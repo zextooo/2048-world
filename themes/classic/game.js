@@ -2,6 +2,10 @@ const gridContainer = document.getElementById("grid-container");
 const scoreDisplay = document.getElementById("score");
 const bestScoreDisplay = document.getElementById("best-score");
 
+// Sound effects
+const moveSound = new Audio("sounds/move.mp3");
+const mergeSound = new Audio("sounds/merge.mp3");
+
 let grid = [];
 let score = 0;
 let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
@@ -20,16 +24,23 @@ function updateBoard() {
   grid.flat().forEach((value, index) => {
     const tile = document.createElement("div");
     tile.className = "tile";
-    tile.textContent = value === 0 ? "" : value;
     tile.dataset.index = index;
 
     const row = Math.floor(index / 4);
     const col = index % 4;
 
-    const isMerged = mergedPositions.some(([r, c]) => r === row && c === col);
-    if (value !== 0 && isMerged) {
-      tile.classList.add("merged");
-      setTimeout(() => tile.classList.remove("merged"), 250);
+    if (value !== 0) {
+      tile.textContent = value;
+      tile.setAttribute("data-value", value); // ✅ For custom tile colors
+
+      const isMerged = mergedPositions.some(([r, c]) => r === row && c === col);
+      if (isMerged) {
+        tile.classList.add("merged");
+        setTimeout(() => tile.classList.remove("merged"), 250);
+
+        mergeSound.currentTime = 0;
+        mergeSound.play(); // 🔊 Play merge sound
+      }
     }
 
     gridContainer.appendChild(tile);
@@ -123,6 +134,9 @@ function move(direction) {
   }
 
   if (moved) {
+    moveSound.currentTime = 0;
+    moveSound.play(); // 🔊 Play move sound
+
     placeRandomTile();
     updateBoard();
   }
