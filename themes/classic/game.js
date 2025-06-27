@@ -13,11 +13,11 @@ function createGrid() {
 
 function updateBoard() {
   gridContainer.innerHTML = "";
-  grid.flat().forEach((value, index) => {
+  grid.flat().forEach((value) => {
     const tile = document.createElement("div");
     tile.className = "tile";
     tile.textContent = value === 0 ? "" : value;
-    tile.dataset.index = index;
+    if (value !== 0) tile.classList.add("merged");
     gridContainer.appendChild(tile);
   });
   scoreDisplay.textContent = "Score: " + score;
@@ -50,13 +50,6 @@ function move(direction) {
           localStorage.setItem("bestScore", bestScore);
         }
         newRow[i + 1] = 0;
-
-        // mark merged
-        let flatIndex = grid.flat().indexOf(newRow[i]);
-        setTimeout(() => {
-          const tile = gridContainer.querySelectorAll(".tile")[flatIndex];
-          if (tile) tile.classList.add("merged");
-        }, 50);
       }
     }
     return newRow.filter(val => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
