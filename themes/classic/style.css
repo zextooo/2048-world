@@ -169,18 +169,20 @@ button:hover {
   100% { transform: translateY(60px) rotate(180deg); }
 }
 
-/* Tile colors by value */
-.tile[data-value="2"]    { background: #e0f7fa; color: #000; }
-.tile[data-value="4"]    { background: #b2ebf2; color: #000; }
-.tile[data-value="8"]    { background: #80deea; color: #000; }
-.tile[data-value="16"]   { background: #4dd0e1; color: #000; }
-.tile[data-value="32"]   { background: #26c6da; color: #000; }
-.tile[data-value="64"]   { background: #00bcd4; color: #fff; }
-.tile[data-value="128"]  { background: #00acc1; color: #fff; }
-.tile[data-value="256"]  { background: #0097a7; color: #fff; }
-.tile[data-value="512"]  { background: #00838f; color: #fff; }
-.tile[data-value="1024"] { background: #006064; color: #fff; }
-.tile[data-value="2048"] { background: #004d40; color: #fff; }
+.tile[data-value="2"]    { background: #ffe5e0; color: #000; }  /* Light coral */
+.tile[data-value="4"]    { background: #ffc8b0; color: #000; }  /* Light peach */
+.tile[data-value="8"]    { background: #ffab80; color: #000; }
+.tile[data-value="16"]   { background: #ff8f66; color: #000; }
+.tile[data-value="32"]   { background: #ff704d; color: #fff; }
+.tile[data-value="64"]   { background: #ff5722; color: #fff; }
+.tile[data-value="128"]  { background: #f4511e; color: #fff; }
+.tile[data-value="256"]  { background: #e64a19; color: #fff; }
+.tile[data-value="512"]  { background: #d84315; color: #fff; }
+.tile[data-value="1024"] { background: #bf360c; color: #fff; }
+.tile[data-value="2048"] { background: #a02800; color: #fff; }
+.tile[data-value="4096"] { background: #891f00; color: #fff; }
+.tile[data-value="8192"] { background: #731800; color: #fff; }
+
 .game-container {
   position: relative;
   z-index: 1;
