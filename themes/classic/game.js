@@ -5,7 +5,7 @@ const bestScoreDisplay = document.getElementById("best-score");
 let grid = [];
 let score = 0;
 let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
-let mergedPositions = []; // NEW: To track where merges happen
+let mergedPositions = [];
 
 function createGrid() {
   grid = new Array(4).fill(null).map(() => new Array(4).fill(0));
@@ -26,7 +26,6 @@ function updateBoard() {
     const row = Math.floor(index / 4);
     const col = index % 4;
 
-    // Only animate if this tile is in mergedPositions
     const isMerged = mergedPositions.some(([r, c]) => r === row && c === col);
     if (value !== 0 && isMerged) {
       tile.classList.add("merged");
@@ -54,10 +53,11 @@ function placeRandomTile() {
 
 function move(direction) {
   let moved = false;
-  mergedPositions = []; // RESET merge list for this move
+  mergedPositions = [];
 
-  function moveRow(row, rowIndex) {
+  function moveRow(row, rowIndex, reverse = false) {
     let newRow = row.filter(val => val !== 0);
+    if (reverse) newRow.reverse();
     for (let i = 0; i < newRow.length - 1; i++) {
       if (newRow[i] === newRow[i + 1]) {
         newRow[i] *= 2;
@@ -67,10 +67,13 @@ function move(direction) {
           localStorage.setItem("bestScore", bestScore);
         }
         newRow[i + 1] = 0;
-        mergedPositions.push([rowIndex, i]); // Record merge position
+        const pos = reverse ? 3 - i : i;
+        mergedPositions.push([rowIndex, pos]);
       }
     }
-    return newRow.filter(val => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
+    newRow = newRow.filter(val => val !== 0);
+    while (newRow.length < 4) newRow.push(0);
+    return reverse ? newRow.reverse() : newRow;
   }
 
   if (direction === "left") {
@@ -85,8 +88,7 @@ function move(direction) {
 
   if (direction === "right") {
     for (let i = 0; i < 4; i++) {
-      const reversed = [...grid[i]].reverse();
-      const newRow = moveRow(reversed, i).reverse();
+      const newRow = moveRow(grid[i], i, true);
       if (!arraysEqual(newRow, grid[i])) {
         grid[i] = newRow;
         moved = true;
@@ -96,8 +98,8 @@ function move(direction) {
 
   if (direction === "up") {
     for (let j = 0; j < 4; j++) {
-      let col = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
-      let newCol = moveRow(col, j); // Using j temporarily
+      const col = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
+      const newCol = moveRow(col, j);
       for (let i = 0; i < 4; i++) {
         if (grid[i][j] !== newCol[i]) {
           grid[i][j] = newCol[i];
@@ -109,8 +111,8 @@ function move(direction) {
 
   if (direction === "down") {
     for (let j = 0; j < 4; j++) {
-      let col = [grid[3][j], grid[2][j], grid[1][j], grid[0][j]];
-      let newCol = moveRow(col, j).reverse(); // Using j temporarily
+      const col = [grid[3][j], grid[2][j], grid[1][j], grid[0][j]];
+      const newCol = moveRow(col, j, true).reverse();
       for (let i = 0; i < 4; i++) {
         if (grid[i][j] !== newCol[i]) {
           grid[i][j] = newCol[i];
@@ -147,5 +149,4 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-// Initialize
 createGrid();
