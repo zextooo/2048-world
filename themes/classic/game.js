@@ -1,7 +1,10 @@
 const gridContainer = document.getElementById("grid-container");
 const scoreDisplay = document.getElementById("score");
+const bestScoreDisplay = document.getElementById("best-score");
+
 let grid = [];
 let score = 0;
+let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
 
 function createGrid() {
   grid = new Array(4).fill(null).map(() => new Array(4).fill(0));
@@ -10,13 +13,15 @@ function createGrid() {
 
 function updateBoard() {
   gridContainer.innerHTML = "";
-  grid.flat().forEach((value) => {
+  grid.flat().forEach((value, index) => {
     const tile = document.createElement("div");
     tile.className = "tile";
     tile.textContent = value === 0 ? "" : value;
+    tile.dataset.index = index;
     gridContainer.appendChild(tile);
   });
   scoreDisplay.textContent = "Score: " + score;
+  bestScoreDisplay.textContent = "Best: " + bestScore;
 }
 
 function placeRandomTile() {
@@ -33,18 +38,28 @@ function placeRandomTile() {
 
 function move(direction) {
   let moved = false;
-  let mergedThisTurn = new Array(4).fill(null).map(() => new Array(4).fill(false));
 
   function moveRow(row) {
-    let newRow = row.filter((val) => val !== 0);
+    let newRow = row.filter(val => val !== 0);
     for (let i = 0; i < newRow.length - 1; i++) {
       if (newRow[i] === newRow[i + 1]) {
         newRow[i] *= 2;
         score += newRow[i];
+        if (score > bestScore) {
+          bestScore = score;
+          localStorage.setItem("bestScore", bestScore);
+        }
         newRow[i + 1] = 0;
+
+        // mark merged
+        let flatIndex = grid.flat().indexOf(newRow[i]);
+        setTimeout(() => {
+          const tile = gridContainer.querySelectorAll(".tile")[flatIndex];
+          if (tile) tile.classList.add("merged");
+        }, 50);
       }
     }
-    return newRow.filter((val) => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
+    return newRow.filter(val => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
   }
 
   if (direction === "left") {
@@ -66,7 +81,7 @@ function move(direction) {
 
   if (direction === "up") {
     for (let col = 0; col < 4; col++) {
-      let column = grid.map((row) => row[col]);
+      let column = grid.map(row => row[col]);
       let newCol = moveRow(column);
       for (let row = 0; row < 4; row++) {
         if (grid[row][col] !== newCol[row]) moved = true;
@@ -77,7 +92,7 @@ function move(direction) {
 
   if (direction === "down") {
     for (let col = 0; col < 4; col++) {
-      let column = grid.map((row) => row[col]).reverse();
+      let column = grid.map(row => row[col]).reverse();
       let newCol = moveRow(column).reverse();
       for (let row = 0; row < 4; row++) {
         if (grid[row][col] !== newCol[row]) moved = true;
