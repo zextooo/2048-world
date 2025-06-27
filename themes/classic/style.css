@@ -177,4 +177,8 @@ button:hover {
 .tile[data-value="65536"] { background: #1e90ff; color: #fff; }
 .tile[data-value="131072"]{ background: #ff8c00; color: #000; }
 .tile[data-value="262144"]{ background: #7cfc00; color: #000; }
+.game-container {
+  position: relative;
+  z-index: 1;
+}
 
