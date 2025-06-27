@@ -1,4 +1,3 @@
-/* Base styling */
 body {
   font-family: Arial, sans-serif;
   background: #faf8ef;
@@ -13,13 +12,18 @@ h1 {
   margin-bottom: 10px;
 }
 
-#score {
+#score, #best-score {
   font-size: 1.5em;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #333;
 }
 
-/* Grid container */
+#scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
 #grid-container {
   display: grid;
   grid-template-columns: repeat(4, 80px);
@@ -29,7 +33,6 @@ h1 {
   margin: 20px auto;
 }
 
-/* Individual tiles */
 .tile {
   width: 80px;
   height: 80px;
@@ -45,7 +48,17 @@ h1 {
   transition: all 0.2s ease;
 }
 
-/* Optional: Add style for new game button */
+.tile.merged {
+  background-color: #f7c873;
+  animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
 button {
   padding: 10px 20px;
   font-size: 16px;
