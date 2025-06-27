@@ -8,14 +8,14 @@ body {
 
 h1 {
   font-size: 3em;
-  color: #776e65;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
 #score, #best-score {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #333;
+  color: #dddddd;
 }
 
 #scoreboard {
@@ -42,7 +42,7 @@ h1 {
   background: #cdc1b4;
   font-size: 32px;
   font-weight: bold;
-  color: #776e65;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
