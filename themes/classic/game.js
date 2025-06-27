@@ -5,9 +5,12 @@ const bestScoreDisplay = document.getElementById("best-score");
 let grid = [];
 let score = 0;
 let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
+let mergedPositions = []; // NEW: To track where merges happen
 
 function createGrid() {
   grid = new Array(4).fill(null).map(() => new Array(4).fill(0));
+  placeRandomTile();
+  placeRandomTile();
   updateBoard();
 }
 
@@ -20,10 +23,14 @@ function updateBoard() {
     tile.textContent = value === 0 ? "" : value;
     tile.dataset.index = index;
 
-    // Add a class for merge flash animation only for non-zero tiles
-    if (value !== 0 && tile.textContent !== "") {
+    const row = Math.floor(index / 4);
+    const col = index % 4;
+
+    // Only animate if this tile is in mergedPositions
+    const isMerged = mergedPositions.some(([r, c]) => r === row && c === col);
+    if (value !== 0 && isMerged) {
       tile.classList.add("merged");
-      setTimeout(() => tile.classList.remove("merged"), 200); // remove after flash
+      setTimeout(() => tile.classList.remove("merged"), 250);
     }
 
     gridContainer.appendChild(tile);
@@ -47,8 +54,9 @@ function placeRandomTile() {
 
 function move(direction) {
   let moved = false;
+  mergedPositions = []; // RESET merge list for this move
 
-  function moveRow(row) {
+  function moveRow(row, rowIndex) {
     let newRow = row.filter(val => val !== 0);
     for (let i = 0; i < newRow.length - 1; i++) {
       if (newRow[i] === newRow[i + 1]) {
@@ -59,6 +67,7 @@ function move(direction) {
           localStorage.setItem("bestScore", bestScore);
         }
         newRow[i + 1] = 0;
+        mergedPositions.push([rowIndex, i]); // Record merge position
       }
     }
     return newRow.filter(val => val !== 0).concat(new Array(4).fill(0)).slice(0, 4);
@@ -66,39 +75,47 @@ function move(direction) {
 
   if (direction === "left") {
     for (let i = 0; i < 4; i++) {
-      const newRow = moveRow(grid[i]);
-      if (!arraysEqual(grid[i], newRow)) moved = true;
-      grid[i] = newRow;
+      const newRow = moveRow(grid[i], i);
+      if (!arraysEqual(newRow, grid[i])) {
+        grid[i] = newRow;
+        moved = true;
+      }
     }
   }
 
   if (direction === "right") {
     for (let i = 0; i < 4; i++) {
       const reversed = [...grid[i]].reverse();
-      const newRow = moveRow(reversed).reverse();
-      if (!arraysEqual(grid[i], newRow)) moved = true;
-      grid[i] = newRow;
+      const newRow = moveRow(reversed, i).reverse();
+      if (!arraysEqual(newRow, grid[i])) {
+        grid[i] = newRow;
+        moved = true;
+      }
     }
   }
 
   if (direction === "up") {
-    for (let col = 0; col < 4; col++) {
-      let column = grid.map(row => row[col]);
-      let newCol = moveRow(column);
-      for (let row = 0; row < 4; row++) {
-        if (grid[row][col] !== newCol[row]) moved = true;
-        grid[row][col] = newCol[row];
+    for (let j = 0; j < 4; j++) {
+      let col = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
+      let newCol = moveRow(col, j); // Using j temporarily
+      for (let i = 0; i < 4; i++) {
+        if (grid[i][j] !== newCol[i]) {
+          grid[i][j] = newCol[i];
+          moved = true;
+        }
       }
     }
   }
 
   if (direction === "down") {
-    for (let col = 0; col < 4; col++) {
-      let column = grid.map(row => row[col]).reverse();
-      let newCol = moveRow(column).reverse();
-      for (let row = 0; row < 4; row++) {
-        if (grid[row][col] !== newCol[row]) moved = true;
-        grid[row][col] = newCol[row];
+    for (let j = 0; j < 4; j++) {
+      let col = [grid[3][j], grid[2][j], grid[1][j], grid[0][j]];
+      let newCol = moveRow(col, j).reverse(); // Using j temporarily
+      for (let i = 0; i < 4; i++) {
+        if (grid[i][j] !== newCol[i]) {
+          grid[i][j] = newCol[i];
+          moved = true;
+        }
       }
     }
   }
@@ -106,30 +123,11 @@ function move(direction) {
   if (moved) {
     placeRandomTile();
     updateBoard();
-    if (isGameOver()) alert("Game Over!");
   }
 }
 
-function isGameOver() {
-  for (let i = 0; i < 4; i++)
-    for (let j = 0; j < 4; j++) {
-      if (grid[i][j] === 0) return false;
-      if (j < 3 && grid[i][j] === grid[i][j + 1]) return false;
-      if (i < 3 && grid[i][j] === grid[i + 1][j]) return false;
-    }
-  return true;
-}
-
 function arraysEqual(a, b) {
-  return a.every((val, index) => val === b[index]);
-}
-
-function startGame() {
-  score = 0;
-  createGrid();
-  placeRandomTile();
-  placeRandomTile();
-  updateBoard();
+  return a.length === b.length && a.every((val, index) => val === b[index]);
 }
 
 document.addEventListener("keydown", (e) => {
@@ -149,4 +147,5 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-window.onload = startGame;
+// Initialize
+createGrid();
