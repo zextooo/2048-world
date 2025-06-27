@@ -170,14 +170,11 @@ button:hover {
 }
 
 /* Tile colors by value */
-.tile[data-value="2"]    { background: #1c1c1c; color: #eee; }
-.tile[data-value="4"]    { background: #292929; color: #eee; }
-.tile[data-value="8"]    { background: #663399; color: #fff; }
-.tile[data-value="16"]   { background: #4b0082; color: #fff; }
-.tile[data-value="32"]   { background: #800080; color: #fff; }
-.tile[data-value="64"]   { background: #8b0000; color: #fff; }
-.tile[data-value="128"]  { background: #b22222; color: #fff; }
-.tile[data-value="256"]  { background: #ff4500; color: #fff; }
-.tile[data-value="512"]  { background: #ffa500; color: #fff; }
-.tile[data-value="1024"] { background: #ffd700; color: #000; }
-.tile[data-value="2048"] { background: #ffff00; color: #000; }
+.tile[data-value="4096"]  { background: #ff00ff; color: #000; }
+.tile[data-value="8192"]  { background: #00ffff; color: #000; }
+.tile[data-value="16384"] { background: #00ff7f; color: #000; }
+.tile[data-value="32768"] { background: #ff1493; color: #fff; }
+.tile[data-value="65536"] { background: #1e90ff; color: #fff; }
+.tile[data-value="131072"]{ background: #ff8c00; color: #000; }
+.tile[data-value="262144"]{ background: #7cfc00; color: #000; }
+
