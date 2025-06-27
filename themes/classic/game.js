@@ -13,13 +13,22 @@ function createGrid() {
 
 function updateBoard() {
   gridContainer.innerHTML = "";
-  grid.flat().forEach((value) => {
+
+  grid.flat().forEach((value, index) => {
     const tile = document.createElement("div");
     tile.className = "tile";
     tile.textContent = value === 0 ? "" : value;
-    if (value !== 0) tile.classList.add("merged");
+    tile.dataset.index = index;
+
+    // Add a class for merge flash animation only for non-zero tiles
+    if (value !== 0 && tile.textContent !== "") {
+      tile.classList.add("merged");
+      setTimeout(() => tile.classList.remove("merged"), 200); // remove after flash
+    }
+
     gridContainer.appendChild(tile);
   });
+
   scoreDisplay.textContent = "Score: " + score;
   bestScoreDisplay.textContent = "Best: " + bestScore;
 }
