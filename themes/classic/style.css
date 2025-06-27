@@ -1,3 +1,4 @@
+/* General page styling */
 body {
   font-family: Arial, sans-serif;
   background: #000;
@@ -6,12 +7,14 @@ body {
   margin: 0;
 }
 
+/* Title */
 h1 {
   font-size: 3em;
   color: #ffffff;
   margin-bottom: 10px;
 }
 
+/* Score display */
 #score, #best-score {
   font-size: 1.5em;
   margin-bottom: 10px;
@@ -24,7 +27,7 @@ h1 {
   gap: 20px;
 }
 
-/* Grid setup */
+/* Grid container */
 #grid-container {
   display: grid;
   grid-template-columns: repeat(4, 120px);
@@ -35,11 +38,11 @@ h1 {
   position: relative;
 }
 
-/* Tile style */
+/* Tile styling */
 .tile {
   width: 120px;
   height: 120px;
- background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
   font-size: 32px;
   font-weight: bold;
   color: #ffffff;
@@ -64,7 +67,7 @@ h1 {
   animation: mergeAnimation 0.25s ease-in-out;
 }
 
-/* Button styling */
+/* Buttons */
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -78,6 +81,8 @@ button {
 button:hover {
   background-color: #9f8b76;
 }
+
+/* Glowing RGB title */
 .glow-title {
   font-size: 3em;
   font-weight: bold;
@@ -96,7 +101,8 @@ button:hover {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-/* Animated background layers */
+
+/* Animated grid background */
 .grid-bg {
   position: fixed;
   inset: 0;
@@ -114,6 +120,7 @@ button:hover {
   to { background-position: 40px 40px; }
 }
 
+/* Gradient glow overlay */
 .gradient-overlay {
   position: fixed;
   inset: 0;
@@ -130,6 +137,7 @@ button:hover {
   100% { background-position: 0% 50%; }
 }
 
+/* Floating blurred blobs */
 .blob {
   position: fixed;
   border-radius: 50%;
@@ -141,13 +149,19 @@ button:hover {
 }
 
 .blob.blue {
-  width: 400px; height: 400px;
-  background: #00ffe1; top: -80px; left: -80px;
+  width: 400px;
+  height: 400px;
+  background: #00ffe1;
+  top: -80px;
+  left: -80px;
 }
 
 .blob.pink {
-  width: 300px; height: 300px;
-  background: #ff00ff; bottom: -80px; right: -80px;
+  width: 300px;
+  height: 300px;
+  background: #ff00ff;
+  bottom: -80px;
+  right: -80px;
 }
 
 @keyframes floatBlob {
@@ -155,6 +169,7 @@ button:hover {
   100% { transform: translateY(60px) rotate(180deg); }
 }
 
+/* Tile colors by value */
 .tile[data-value="2"]    { background: #1c1c1c; color: #eee; }
 .tile[data-value="4"]    { background: #292929; color: #eee; }
 .tile[data-value="8"]    { background: #663399; color: #fff; }
@@ -166,4 +181,3 @@ button:hover {
 .tile[data-value="512"]  { background: #ffa500; color: #fff; }
 .tile[data-value="1024"] { background: #ffd700; color: #000; }
 .tile[data-value="2048"] { background: #ffff00; color: #000; }
-
