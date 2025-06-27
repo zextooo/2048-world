@@ -78,3 +78,21 @@ button {
 button:hover {
   background-color: #9f8b76;
 }
+.glow-title {
+  font-size: 3em;
+  font-weight: bold;
+  background: linear-gradient(270deg, #ff0000, #00ff00, #0000ff, #ff0000);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rgb-glow 5s ease infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
+               0 0 20px rgba(255, 255, 255, 0.4),
+               0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes rgb-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
