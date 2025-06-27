@@ -154,3 +154,16 @@ button:hover {
   0% { transform: translateY(0) rotate(0deg); }
   100% { transform: translateY(60px) rotate(180deg); }
 }
+
+.tile[data-value="2"]    { background: #1c1c1c; color: #eee; }
+.tile[data-value="4"]    { background: #292929; color: #eee; }
+.tile[data-value="8"]    { background: #663399; color: #fff; }
+.tile[data-value="16"]   { background: #4b0082; color: #fff; }
+.tile[data-value="32"]   { background: #800080; color: #fff; }
+.tile[data-value="64"]   { background: #8b0000; color: #fff; }
+.tile[data-value="128"]  { background: #b22222; color: #fff; }
+.tile[data-value="256"]  { background: #ff4500; color: #fff; }
+.tile[data-value="512"]  { background: #ffa500; color: #fff; }
+.tile[data-value="1024"] { background: #ffd700; color: #000; }
+.tile[data-value="2048"] { background: #ffff00; color: #000; }
+
