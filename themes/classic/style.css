@@ -1,0 +1,30 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #faf8ef;
+  margin: 0;
+  padding: 20px;
+}
+
+#game-container {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(4, 80px);
+  gap: 5px;
+  margin: auto;
+}
+
+.tile {
+  width: 80px;
+  height: 80px;
+  background: #ccc0b3;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 80px;
+  border-radius: 4px;
+}
