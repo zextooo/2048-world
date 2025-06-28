@@ -1,23 +1,39 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2048: Cricketer Edition</title>
+  <title>2048 Cricketers</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="header">
-    <h1>2048: Cricketer Edition</h1>
-    <div class="scores">
-      <div id="score">Score: 0</div>
-      <div id="best-score">Best: 0</div>
+  <div class="game-container">
+    <h1 class="glow-title">2048: Cricketers</h1>
+
+    <!-- Scoreboard with New Game beside -->
+    <div id="scoreboard">
+      <div class="score-box">
+        <div>Score</div>
+        <div id="score">0</div>
+      </div>
+      <div class="score-box">
+        <div>Best</div>
+        <div id="best-score">0</div>
+      </div>
+      <button id="new-game-btn">New Game</button>
     </div>
-    <button id="new-game-btn">New Game</button>
+
+    <!-- Grid -->
+    <div id="grid-container"></div>
   </div>
-  <div id="grid-container"></div>
-  <div id="game-over-overlay" class="hidden">Game Over</div>
+
+  <!-- Game Over Overlay -->
+  <div id="game-over-overlay">
+    <div class="game-over-box">
+      <h2>Game Over</h2>
+      <button onclick="restartGame()">Restart</button>
+      <button onclick="location.href='https://zextooo.github.io/2048-world/'">Home</button>
+    </div>
+  </div>
 
   <script src="game.js"></script>
 </body>
