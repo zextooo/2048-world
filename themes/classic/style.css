@@ -7,12 +7,12 @@ body {
   margin: 0;
 }
 
+
+
 /* Title */
-.glow-title {
+h1 {
   font-size: 3em;
-  font-weight: bold;
-  color: #00bcd4; /* Cyan tone: works on both light & dark */
-  text-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 
@@ -84,23 +84,33 @@ button:hover {
   background-color: #9f8b76;
 }
 
-/* Tile colors with neon effect */
-.tile[data-value="2"]    { background: #00ffff; color: #000; }
-.tile[data-value="4"]    { background: #7fff00; color: #000; }
-.tile[data-value="8"]    { background: #ff00ff; color: #000; }
-.tile[data-value="16"]   { background: #ffea00; color: #000; }
-.tile[data-value="32"]   { background: #00ff7f; color: #000; }
-.tile[data-value="64"]   { background: #ff4500; color: #fff; }
-.tile[data-value="128"]  { background: #1e90ff; color: #fff; }
-.tile[data-value="256"]  { background: #ff1493; color: #fff; }
-.tile[data-value="512"]  { background: #8a2be2; color: #fff; }
-.tile[data-value="1024"] { background: #00ced1; color: #000; }
-.tile[data-value="2048"] { background: #39ff14; color: #000; }
-.tile[data-value="4096"] { background: #ff69b4; color: #000; }
-.tile[data-value="8192"] { background: #9400d3; color: #fff; }
-.tile[data-value="16384"] { background: #ff0000; color: #fff; }
-.tile[data-value="32768"] { background: #ffd700; color: #000; }
-.tile[data-value="65536"] { background: #7cfc00; color: #000; }
+.glow-title {
+  font-size: 3em;
+  font-weight: bold;
+  color: #00bcd4; /* Cyan tone: great on dark and light backgrounds */
+  text-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
+}
+
+
+/* Animated grid background */
+
+.tile[data-value="2"]    { background: #00ffff; color: #000; } /* Neon Cyan */
+.tile[data-value="4"]    { background: #7fff00; color: #000; } /* Neon Green */
+.tile[data-value="8"]    { background: #ff00ff; color: #000; } /* Neon Magenta */
+.tile[data-value="16"]   { background: #ffea00; color: #000; } /* Neon Yellow */
+.tile[data-value="32"]   { background: #00ff7f; color: #000; } /* Spring Green */
+.tile[data-value="64"]   { background: #ff4500; color: #fff; } /* Neon Orange */
+.tile[data-value="128"]  { background: #1e90ff; color: #fff; } /* Neon Blue */
+.tile[data-value="256"]  { background: #ff1493; color: #fff; } /* Deep Pink */
+.tile[data-value="512"]  { background: #8a2be2; color: #fff; } /* Electric Violet */
+.tile[data-value="1024"] { background: #00ced1; color: #000; } /* Dark Turquoise */
+.tile[data-value="2048"] { background: #39ff14; color: #000; } /* Bright Neon Green */
+.tile[data-value="4096"] { background: #ff69b4; color: #000; } /* Neon Hot Pink */
+.tile[data-value="8192"] { background: #9400d3; color: #fff; } /* Dark Violet */
+.tile[data-value="16384"] { background: #ff0000; color: #fff; } /* Red */
+.tile[data-value="32768"] { background: #ffd700; color: #000; } /* Gold */
+.tile[data-value="65536"] { background: #7cfc00; color: #000; } /* Lawn Green */
+
 
 .game-container {
   position: relative;
