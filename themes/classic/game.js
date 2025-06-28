@@ -115,6 +115,9 @@ function move(direction) {
     for (let j = 0; j < 4; j++) {
       const col = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
       const newCol = moveRow(col, j);
+if (!arraysEqual(col, newCol)) {
+  moved = true;
+}
       for (let i = 0; i < 4; i++) {
         if (grid[i][j] !== newCol[i]) {
           grid[i][j] = newCol[i];
