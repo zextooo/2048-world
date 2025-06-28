@@ -112,14 +112,18 @@ function move(direction) {
   }
 if (direction === "up") {
   for (let j = 0; j < 4; j++) {
-    const col = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
-    const newCol = moveRow(col, j);
-    for (let i = 0; i < 4; i++) {
-      grid[i][j] = newCol[i];
-    }
-    if (!arraysEqual(col, newCol)) {
-      moved = true;
-    }
+const originalCol = [grid[0][j], grid[1][j], grid[2][j], grid[3][j]];
+const col = [grid[3][j], grid[2][j], grid[1][j], grid[0][j]]; // reversed original
+const newCol = moveRow(col, j, true).reverse();
+
+for (let i = 0; i < 4; i++) {
+  grid[i][j] = newCol[i];
+}
+
+if (!arraysEqual(originalCol, newCol)) {
+  moved = true;
+}
+
   }
 }
 
