@@ -32,9 +32,9 @@ h1 {
 /* Grid container */
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 120px);
-  grid-template-rows: repeat(4, 120px);
-  gap: 12px;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  gap: 10px;
   justify-content: center;
   margin: 20px auto;
   position: relative;
@@ -42,10 +42,10 @@ h1 {
 
 /* Tile styling */
 .tile {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   background: rgba(255, 255, 255, 0.05);
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
   color: #ffffff;
   display: flex;
