@@ -1,49 +1,25 @@
-/* Reset and layout */
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
+  font-family: Arial, sans-serif;
   background: url('images/background.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-}
-
-/* Wrapper to center game */
-.game-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Game container layout */
-.game-container {
-  position: relative;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.4); /* Optional: adds contrast */
   padding: 20px;
-  border-radius: 10px;
+  margin: 0;
 }
 
 /* Title */
 .glow-title {
-  font-size: 2.2em;
+  font-size: 3em;
   font-weight: bold;
-  color: #00bcd4;
+  color: #00bcd4; /* Cyan tone: works on both light & dark */
   text-shadow: 0 0 5px #00bcd4, 0 0 10px #00bcd4;
   margin-bottom: 10px;
-  text-transform: uppercase;
 }
 
 /* Score display */
 #score, #best-score {
-  font-size: 1.2em;
-  margin-bottom: 8px;
+  font-size: 1.5em;
+  margin-bottom: 10px;
   color: #dddddd;
 }
 
@@ -56,20 +32,20 @@ body {
 /* Grid container */
 #grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 70px);
-  grid-template-rows: repeat(4, 70px);
-  gap: 8px;
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(4, 120px);
+  gap: 12px;
   justify-content: center;
-  margin: 10px auto;
+  margin: 20px auto;
   position: relative;
 }
 
 /* Tile styling */
 .tile {
-  width: 70px;
-  height: 70px;
+  width: 120px;
+  height: 120px;
   background: rgba(255, 255, 255, 0.05);
-  font-size: 20px;
+  font-size: 32px;
   font-weight: bold;
   color: #ffffff;
   display: flex;
@@ -93,21 +69,40 @@ body {
   animation: mergeAnimation 0.25s ease-in-out;
 }
 
-/* Button styling */
+/* Buttons */
 button {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
   background-color: #8f7a66;
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
 button:hover {
   background-color: #9f8b76;
 }
 
-/* Neon tile colors */
-.tile[data-value="2]()
+/* Tile colors with neon effect */
+.tile[data-value="2"]    { background: #00ffff; color: #000; }
+.tile[data-value="4"]    { background: #7fff00; color: #000; }
+.tile[data-value="8"]    { background: #ff00ff; color: #000; }
+.tile[data-value="16"]   { background: #ffea00; color: #000; }
+.tile[data-value="32"]   { background: #00ff7f; color: #000; }
+.tile[data-value="64"]   { background: #ff4500; color: #fff; }
+.tile[data-value="128"]  { background: #1e90ff; color: #fff; }
+.tile[data-value="256"]  { background: #ff1493; color: #fff; }
+.tile[data-value="512"]  { background: #8a2be2; color: #fff; }
+.tile[data-value="1024"] { background: #00ced1; color: #000; }
+.tile[data-value="2048"] { background: #39ff14; color: #000; }
+.tile[data-value="4096"] { background: #ff69b4; color: #000; }
+.tile[data-value="8192"] { background: #9400d3; color: #fff; }
+.tile[data-value="16384"] { background: #ff0000; color: #fff; }
+.tile[data-value="32768"] { background: #ffd700; color: #000; }
+.tile[data-value="65536"] { background: #7cfc00; color: #000; }
+
+.game-container {
+  position: relative;
+  z-index: 1;
+}
