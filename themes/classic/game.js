@@ -1,6 +1,8 @@
 const gridContainer = document.getElementById("grid-container");
 const scoreDisplay = document.getElementById("score");
 const bestScoreDisplay = document.getElementById("best-score");
+const newGameBtn = document.getElementById("new-game-btn");
+const gameOverOverlay = document.getElementById("game-over-overlay");
 
 // Sound effects
 const moveSound = new Audio("sounds/move.mp3");
@@ -11,8 +13,10 @@ let score = 0;
 let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
 let mergedPositions = [];
 
+/* ========== Initialize Game ========== */
 function createGrid() {
   grid = new Array(4).fill(null).map(() => new Array(4).fill(0));
+  score = 0;
   placeRandomTile();
   placeRandomTile();
   updateBoard();
@@ -31,7 +35,7 @@ function updateBoard() {
 
     if (value !== 0) {
       tile.textContent = value;
-      tile.setAttribute("data-value", value); // ✅ For custom tile colors
+      tile.setAttribute("data-value", value);
 
       const isMerged = mergedPositions.some(([r, c]) => r === row && c === col);
       if (isMerged) {
@@ -39,7 +43,7 @@ function updateBoard() {
         setTimeout(() => tile.classList.remove("merged"), 250);
 
         mergeSound.currentTime = 0;
-        mergeSound.play(); // 🔊 Play merge sound
+        mergeSound.play();
       }
     }
 
@@ -135,10 +139,10 @@ function move(direction) {
 
   if (moved) {
     moveSound.currentTime = 0;
-    moveSound.play(); // 🔊 Play move sound
-
+    moveSound.play();
     placeRandomTile();
     updateBoard();
+    if (checkGameOver()) showGameOver();
   }
 }
 
@@ -146,6 +150,29 @@ function arraysEqual(a, b) {
   return a.length === b.length && a.every((val, index) => val === b[index]);
 }
 
+/* ========== Game Over Detection ========== */
+function checkGameOver() {
+  // If any empty cell exists, not over
+  for (let r = 0; r < 4; r++) {
+    for (let c = 0; c < 4; c++) {
+      if (grid[r][c] === 0) return false;
+      if (c < 3 && grid[r][c] === grid[r][c + 1]) return false;
+      if (r < 3 && grid[r][c] === grid[r + 1][c]) return false;
+    }
+  }
+  return true;
+}
+
+function showGameOver() {
+  gameOverOverlay.classList.add("show");
+}
+
+function restartGame() {
+  gameOverOverlay.classList.remove("show");
+  createGrid();
+}
+
+/* ========== Controls ========== */
 document.addEventListener("keydown", (e) => {
   switch (e.key) {
     case "ArrowLeft":
@@ -163,4 +190,8 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+/* ========== Hook up New Game Button ========== */
+newGameBtn.addEventListener("click", restartGame);
+
+/* Start */
 createGrid();
