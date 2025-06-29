@@ -71,13 +71,15 @@ h1 {
   max-width: 80%;
   height: auto;
   border-radius: 4px;
+  object-fit: cover;
 }
 
 .tile .player-name {
   font-size: 0.75em;
   margin-top: 4px;
   color: #fff;
-  text-shadow: 0 0 3px #000;
+  text-shadow: 0 0 3px #000, 0 0 5px #000;
+  text-align: center;
 }
 
 @keyframes mergeAnimation {
@@ -144,4 +146,26 @@ button:hover {
 
 .game-over-box button:hover {
   background: #00ffff;
+}
+
+/* ✅ Optional: Mobile responsiveness */
+@media (max-width: 500px) {
+  #grid-container {
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: repeat(4, 70px);
+    gap: 6px;
+  }
+
+  .tile {
+    width: 70px;
+    height: 70px;
+  }
+
+  .tile img {
+    max-width: 70%;
+  }
+
+  .glow-title {
+    font-size: 2em;
+  }
 }
