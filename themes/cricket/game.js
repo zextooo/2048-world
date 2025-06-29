@@ -10,10 +10,10 @@ const mergeSound = new Audio("sounds/merge.mp3");
 
 // Cricketer data
 const cricketers = [
-  { level: 2, name: "Rohit Sharma", image: "img/cricketers/rohit.png" },
-  { level: 4, name: "Virat Kohli", image: "img/cricketers/virat.png" },
-  { level: 8, name: "Shubman Gill", image: "img/cricketers/shubman.png" },
-  { level: 16, name: "Hardik Pandya", image: "img/cricketers/hardik.png" },
+  { level: 2, name: "Rohit Sharma", image: "img/rohit.jpg" },
+  { level: 4, name: "Virat Kohli", image: "img/virat.jpg" },
+  { level: 8, name: "Shubman Gill", image: "img/shubman.jpg" },
+  { level: 16, name: "Hardik Pandya", image: "img/hardik.jpg" },
 ];
 
 let grid = [];
