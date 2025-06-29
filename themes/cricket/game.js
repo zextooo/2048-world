@@ -14,11 +14,6 @@ const cricketers = [
   { level: 4, name: "Virat Kohli", image: "img/cricketers/virat.png" },
   { level: 8, name: "Shubman Gill", image: "img/cricketers/shubman.png" },
   { level: 16, name: "Hardik Pandya", image: "img/cricketers/hardik.png" },
-  { level: 32, name: "MS Dhoni", image: "img/cricketers/dhoni.png" },
-  { level: 64, name: "Sachin Tendulkar", image: "img/cricketers/sachin.png" },
-  { level: 128, name: "Yuvraj Singh", image: "img/cricketers/yuvraj.png" },
-  { level: 256, name: "Kapil Dev", image: "img/cricketers/kapil.png" },
-  { level: 512, name: "Sunil Gavaskar", image: "img/cricketers/gavaskar.png" },
 ];
 
 let grid = [];
